@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:sushi_resturant/components/button.dart';
+import 'package:sushi_resturant/models/shop.dart';
+
 import 'package:sushi_resturant/theme/colors.dart';
 import 'package:sushi_resturant/models/food.dart';
 
 import '../components/food_tile.dart';
+import 'food_details_page.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -14,54 +18,46 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-  // food menu
-  List foodMenu = [
-    //salmon sushi
-    Food(
-      name: "Salmon Sushi",
-      price: "21.00",
-      imagePath: "lib/images/salmon.png",
-      rating: "4.9",
-    ),
+// navigate to food item details page
+  void navigateToFoodDetails(int index) {
+    // get the shop and it's menu
+    final shop = context.read<Shop>();
+    final foodMenu = shop.foodMenu;
 
-    //tuna sushi
-    Food(
-      name: "Tuna Sushi",
-      price: "23.00",
-      imagePath: "lib/images/tuna.png",
-      rating: "4.7",
-    ),
-    //maki sushi
-    Food(
-      name: "Maki Sushi",
-      price: "12.00",
-      imagePath: "lib/images/maki.png",
-      rating: "4.3",
-    ),
-    //bento
-    Food(
-      name: "Bento Special",
-      price: "19.95",
-      imagePath: "lib/images/bento.png",
-      rating: "5.0",
-    )
-  ];
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FoodDetailsPage(
+          food: foodMenu[index],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    final shop = context.read<Shop>();
+    final foodMenu = shop.foodMenu;
+
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        foregroundColor: Colors.grey[800],
         elevation: 0,
-        leading: Icon(
-          Icons.menu,
-          color: Colors.grey[900],
-        ),
-        title: Text(
+        leading: const Icon(Icons.menu),
+        title: const Text(
           'Tokyo',
-          style: TextStyle(color: Colors.grey[900]),
         ),
+        actions: [
+          // cart button
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/cartpage');
+            },
+            icon: Icon(Icons.shopping_cart),
+          ),
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +65,7 @@ class _MenuPageState extends State<MenuPage> {
           // promo banner
           Container(
             decoration: BoxDecoration(
-              color: pirmaryColor,
+              color: primaryColor,
               borderRadius: BorderRadius.circular(20),
             ),
             margin: const EdgeInsets.symmetric(horizontal: 25),
@@ -115,13 +111,14 @@ class _MenuPageState extends State<MenuPage> {
             child: TextField(
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
+                  borderSide: const BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
+                  borderSide: const BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(20),
                 ),
+                hintText: "Search here..",
               ),
             ),
           ),
@@ -149,11 +146,64 @@ class _MenuPageState extends State<MenuPage> {
               itemCount: foodMenu.length,
               itemBuilder: (context, index) => FoodTile(
                 food: foodMenu[index],
+                onTap: () => navigateToFoodDetails(index),
               ),
             ),
           ),
 
+          const SizedBox(height: 25),
+
           //popular food
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.grey[100],
+              borderRadius: BorderRadius.circular(20),
+            ),
+            margin: const EdgeInsets.only(left: 25, right: 25, bottom: 25),
+            padding: const EdgeInsets.all(20),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // image
+                  Row(
+                    children: [
+                      Image.asset(
+                        'lib/images/salmon.png',
+                        height: 60,
+                      ),
+
+                      const SizedBox(width: 20),
+
+                      //name and price
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // name
+                          Text(
+                            "Salmon Sushi",
+                            style: GoogleFonts.dmSerifDisplay(fontSize: 18),
+                          ),
+
+                          const SizedBox(height: 10),
+
+                          // Price
+                          Text(
+                            '\$21.00',
+                            style: TextStyle(color: Colors.grey[700]),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+
+                  // heart
+                  const Icon(
+                    Icons.favorite_outline,
+                    color: Colors.grey,
+                    size: 28,
+                  )
+                ]),
+          )
         ],
       ),
     );
