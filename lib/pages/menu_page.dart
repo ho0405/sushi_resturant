@@ -4,6 +4,8 @@ import 'package:sushi_resturant/components/button.dart';
 import 'package:sushi_resturant/theme/colors.dart';
 import 'package:sushi_resturant/models/food.dart';
 
+import '../components/food_tile.dart';
+
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
 
@@ -143,7 +145,11 @@ class _MenuPageState extends State<MenuPage> {
 
           Expanded(
             child: ListView.builder(
-              itemBuilder: (context, index) => FoodTile(),
+              scrollDirection: Axis.horizontal,
+              itemCount: foodMenu.length,
+              itemBuilder: (context, index) => FoodTile(
+                food: foodMenu[index],
+              ),
             ),
           ),
 

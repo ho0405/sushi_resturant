@@ -7,7 +7,7 @@ class FoodTile extends StatelessWidget {
   const FoodTile({
     super.key,
     required this.food,
-    });
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,37 +16,37 @@ class FoodTile extends StatelessWidget {
         color: Colors.grey[100],
         borderRadius: BorderRadius.circular(20),
       ),
+      margin: EdgeInsets.only(left: 25),
       child: Column(
         children: [
           // image
           Image.asset(
             food.imagePath,
             height: 140,
-            ),
+          ),
 
-            // text
-            Text(food.name,
+          // text
+          Text(
+            food.name,
             style: GoogleFonts.dmSerifDisplay(fontSize: 20),
-            ),
+          ),
 
-            // price + rating
-            SizedBox(
-              width: 160,
-              child: Row(
-                children: [
+          // price + rating
+          SizedBox(
+            width: 160,
+            child: Row(
+              children: [
+                // price
+                Text('\$' + food.price),
 
-                  // price
-                  Text('')
-
-                  // rating
-
+                // rating
+                Icon(Icons.star),
+                Text(food.rating),
               ],
-              ),
-            )
-
-      ],
+            ),
+          )
+        ],
       ),
-    )
-
+    );
   }
 }
