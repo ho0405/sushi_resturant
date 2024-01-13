@@ -45,9 +45,15 @@ class _MenuPageState extends State<MenuPage> {
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.grey[800],
         elevation: 0,
-        leading: const Icon(Icons.menu),
-        title: const Text(
+        leading: Icon(
+          Icons.menu,
+          color: Colors.grey[900],
+        ),
+        title: Text(
           'Tokyo',
+          style: TextStyle(
+            color: Colors.grey[900],
+          ),
         ),
         actions: [
           // cart button

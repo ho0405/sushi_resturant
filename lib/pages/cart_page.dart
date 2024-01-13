@@ -20,7 +20,12 @@ class CartPage extends StatelessWidget {
       builder: (context, value, child) => Scaffold(
         backgroundColor: primaryColor,
         appBar: AppBar(
-          title: const Text("My Cart"),
+          title: const Text(
+            "My Cart",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
           elevation: 0,
           backgroundColor: primaryColor,
         ),

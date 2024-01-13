@@ -23,7 +23,7 @@ class IntroPage extends StatelessWidget {
 
             // Shop name
             Text(
-              "SUSHI MAN",
+              "HERO SUSHI",
               style: _dmSerifDisplay.copyWith(
                 fontSize: 28,
               ),
@@ -34,7 +34,7 @@ class IntroPage extends StatelessWidget {
             // Icon
             Padding(
               padding: const EdgeInsets.all(50.0),
-              child: Image.asset('lib/images/maki.png'),
+              child: Image.asset('lib/images/main.png'),
             ),
 
             const SizedBox(height: 25),
