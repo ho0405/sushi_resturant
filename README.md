@@ -14,7 +14,7 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-![sushirestaurant](https://github.com/ho0405/sushi_resturant/assets/23023444/fb3b918b-e7f9-4d26-83fb-4735a7c1f2cb)
+<img src="https://github.com/ho0405/sushi_resturant/assets/23023444/fb3b918b-e7f9-4d26-83fb-4735a7c1f2cb" width="400">
 
 <!-- Resized screenshots with width attributes -->
 <img src="https://github.com/ho0405/sushi_resturant/assets/23023444/09ab51c2-1fd3-4061-a56b-15789e39e94f" width="300">
